@@ -6,56 +6,80 @@
     --text-color: #212121;
     --key-bg: #d3d6da;
     --border-color: #d3d6da;
+    --tile-size: 62px;
+    --key-height: 58px;
+    --key-width: 35px;
+    --gap: 5px;
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-touch-callout: none; /* Disable text selection on iOS */
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 }
 
 .container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    max-width: 100%;
 }
 
 header {
-    text-align: center;
-    margin-bottom: 2rem;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0;
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
 }
 
 #game-board {
     display: grid;
-    grid-template-rows: repeat(6, 1fr);
-    gap: 5px;
-    margin-bottom: 2rem;
+    grid-template-rows: repeat(6, var(--tile-size));
+    gap: var(--gap);
+    padding: 10px;
+    margin: auto 0;
 }
 
 .game-row {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
+    grid-template-columns: repeat(5, var(--tile-size));
+    gap: var(--gap);
+    justify-content: center;
 }
 
 .game-tile {
-    aspect-ratio: 1;
+    width: var(--tile-size);
+    height: var(--tile-size);
     border: 2px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 32px;
     font-weight: bold;
     text-transform: uppercase;
     background: white;
     transition: all 0.3s ease;
-    transform: scale(1);
 }
 
 .game-tile.filled {
@@ -63,59 +87,82 @@ header {
 }
 
 #keyboard {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    gap: 5px;
+    padding: 10px;
+    margin-top: auto;
+    margin-bottom: 8px;
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .keyboard-row {
     display: flex;
     justify-content: center;
-    gap: 5px;
+    gap: 4px;
+    margin-bottom: 8px;
 }
 
 .key {
-    padding: 1rem;
+    height: var(--key-height);
+    min-width: 30px;
     border: none;
     border-radius: 4px;
     background: var(--key-bg);
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.2s ease;
+    font-size: 13px;
+    text-transform: uppercase;
     color: var(--text-color);
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
 }
 
-.key:hover {
-    background: #bbbfc3;
+/* Make ENTER and ⌫ keys wider but not too wide */
+.key[data-key="ENTER"],
+.key[data-key="⌫"] {
+    min-width: 55px;
+    flex: 1.2;
 }
 
-.proposal-message {
+.error-message {
     position: fixed;
-    top: 50%;
+    top: 60px; /* Below header */
     left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.95);
-    padding: 3rem;
-    border-radius: 15px;
-    box-shadow: 0 0 30px rgba(0,0,0,0.3);
-    text-align: center;
-    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 1000;
-    width: 90%;
-    max-width: 400px;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Adjust proposal message for iPhone */
+.proposal-message {
+    width: 85%;
+    padding: 24px;
+    background: white;
 }
 
 .proposal-message h2 {
-    color: #ff4081;
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-    animation: heartBeat 1s infinite;
+    font-size: 24px;
+    margin-bottom: 16px;
 }
 
 .proposal-message p {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: #333;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+/* Add safe area insets for iPhone */
+@supports (padding: max(0px)) {
+    .container {
+        padding-top: max(0px, env(safe-area-inset-top));
+        padding-bottom: max(0px, env(safe-area-inset-bottom));
+    }
 }
 
 .hearts-bg {
@@ -151,19 +198,6 @@ header {
 @keyframes floatHeart {
     0% { transform: translateY(0) rotate(0deg); }
     100% { transform: translateY(-100vh) rotate(360deg); }
-}
-
-.error-message {
-    position: fixed;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    animation: fadeInOut 1s ease;
-    z-index: 1000;
 }
 
 .shake {
