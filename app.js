@@ -180,7 +180,7 @@ class WordMaster {
 
         // Show the proposal message
         setTimeout(() => {
-            // Add hearts background
+            // Add hearts background FIRST
             const heartsBg = document.createElement('div');
             heartsBg.className = 'hearts-bg';
             document.body.appendChild(heartsBg);
@@ -196,20 +196,27 @@ class WordMaster {
                     font-size: ${Math.random() * 20 + 10}px;
                     animation: floatHeart ${Math.random() * 3 + 2}s linear infinite;
                     opacity: ${Math.random() * 0.7 + 0.3};
+                    z-index: 999;  /* Ensure each heart has the correct z-index */
                 `;
                 heartsBg.appendChild(heart);
             }
 
-            // Show proposal message
+            // Add modal overlay SECOND
+            const overlay = document.createElement('div');
+            overlay.className = 'modal-overlay';
+            document.body.appendChild(overlay);
+
+            // Show proposal message LAST
             const message = document.createElement('div');
             message.className = 'proposal-message';
             message.innerHTML = `
                 <h2>Will You Marry Me? 💝</h2>
+                <br/>
                 <p>You're the missing piece to my puzzle.</p>
-                <p>I want to spend the rest of my life with you.</p>
+                <p>I'm 100% sure I want to spend the rest of my life with you.</p>
                 <p style="font-size: 2rem; margin-top: 1rem;">💍</p>
             `;
-            document.querySelector('.container').appendChild(message);
+            document.body.appendChild(message);
 
             // Play celebration sound (optional)
             const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3');
