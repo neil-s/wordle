@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Icons</title>
+</head>
+<body>
+    <!-- Icon 512x512 -->
+    <canvas id="icon512" width="512" height="512"></canvas>
+    
+    <!-- Icon 192x192 -->
+    <canvas id="icon192" width="192" height="192"></canvas>
+    
+    <!-- Splash screen -->
+    <canvas id="splash" width="1170" height="2532"></canvas>
+    
+    <script>
+        // Generate 512x512 icon
+        const canvas512 = document.getElementById('icon512');
+        const ctx512 = canvas512.getContext('2d');
+        ctx512.fillStyle = 'white';
+        ctx512.fillRect(0, 0, 512, 512);
+        ctx512.fillStyle = 'black';
+        ctx512.font = 'bold 300px Arial';
+        ctx512.textAlign = 'center';
+        ctx512.textBaseline = 'middle';
+        ctx512.fillText('W', 256, 256);
+
+        // Generate 192x192 icon
+        const canvas192 = document.getElementById('icon192');
+        const ctx192 = canvas192.getContext('2d');
+        ctx192.fillStyle = 'white';
+        ctx192.fillRect(0, 0, 192, 192);
+        ctx192.fillStyle = 'black';
+        ctx192.font = 'bold 120px Arial';
+        ctx192.textAlign = 'center';
+        ctx192.textBaseline = 'middle';
+        ctx192.fillText('W', 96, 96);
+
+        // Generate splash screen
+        const canvasSplash = document.getElementById('splash');
+        const ctxSplash = canvasSplash.getContext('2d');
+        ctxSplash.fillStyle = 'white';
+        ctxSplash.fillRect(0, 0, 1170, 2532);
+        ctxSplash.fillStyle = 'black';
+        ctxSplash.font = 'bold 120px Arial';
+        ctxSplash.textAlign = 'center';
+        ctxSplash.textBaseline = 'middle';
+        ctxSplash.fillText('Wordle', 585, 1266);
+    </script>
+    
+    <p>Right-click each canvas and select "Save Image As..." to save the icons:</p>
+    <ul>
+        <li>Save the first canvas as "icon-512.png"</li>
+        <li>Save the second canvas as "icon-192.png"</li>
+        <li>Save the third canvas as "splash.png"</li>
+    </ul>
+</body>
+</html> 
