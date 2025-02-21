@@ -206,7 +206,7 @@ class WordMaster {
             message.innerHTML = `
                 <h2>Will You Marry Me? 💝</h2>
                 <p>You're the missing piece to my puzzle.</p>
-                <p>I want to spend the rest of my life with you.</p>
+                <p>I'm 100% sure I want to spend the rest of my life with you.</p>
                 <p style="font-size: 2rem; margin-top: 1rem;">💍</p>
             `;
             document.querySelector('.container').appendChild(message);
