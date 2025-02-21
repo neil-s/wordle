@@ -2,7 +2,7 @@
   "name": "Wordle Proposal",
   "short_name": "Wordle",
   "description": "A special Wordle game for a marriage proposal",
-  "start_url": "/",
+  "start_url": "/wordle",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
